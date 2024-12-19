@@ -21,6 +21,7 @@ var args struct {
 	Episodes    string `arg:"-e,--episodes" help:"range of episodes for download (required --season arg)"`
 	Translation string `arg:"-t,--translation" placeholder:"NAME" help:"translation for download video"`
 	Subtitle    string `arg:"-c,--subtitle" placeholder:"LANG" help:"get subtitle for downloaded video"`
+	Name	    string `arg:"-n, --name" help:"name of output file"`
 }
 
 func main() {
@@ -75,8 +76,11 @@ func main() {
 		if video.TitleOriginal != "" {
 			title = video.TitleOriginal
 		}
+		if args.Name != "" {
+			title = args.Name
+		}
 		title = strings.ReplaceAll(title, "/", "-")
-		args.Output = fmt.Sprintf("%s (%s).mp4", title, video.Year)
+		args.Output = fmt.Sprintf("%s_(%s).mp4", title, video.Year)
 	}
 
 	var translation *hdrezka.Translation

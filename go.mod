@@ -1,4 +1,4 @@
-module github.com/n0madic/go-hdrezka
+module github.com/Besik13/go-hdrezka
 
 go 1.18
 

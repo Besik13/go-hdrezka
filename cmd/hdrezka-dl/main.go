@@ -80,7 +80,7 @@ func main() {
 			title = args.Name
 		}
 		title = strings.ReplaceAll(title, "/", "-")
-		args.Output = fmt.Sprintf("%s_(%s).mp4", title, video.Year)
+		args.Output = fmt.Sprintf("%s_(%s)", title, video.Year)
 	}
 
 	var translation *hdrezka.Translation
@@ -100,7 +100,9 @@ func main() {
 	downloadStream := func(season int, episode int) {
 		output := args.Output
 		if season > 0 && episode > 0 {
-			output = fmt.Sprintf("%s_s%02de%02d", output, season, episode)
+			output = fmt.Sprintf("%s_S%02dE%02d.mp4", output, season, episode)
+		} else {
+			output = fmt.Sprintf("%s.mp4", output)
 		}
 		_, err := os.Stat(output)
 		if !args.Overwrite && err == nil {
